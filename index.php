@@ -3,86 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test1xxx</title>
+    <title>Register & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, voluptatum.</p> 
+    <div class="container" id="signup" style="display:none;">
+      <h1 class="form-title">Register</h1>
+      <form method="post" action="register.php">
+        <div class="input-group">
+           <i class="fas fa-user"></i>
+           <input type="text" name="fName" id="fName" placeholder="First Name" required>
+           <label for="fname">First Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" name="lName" id="lName" placeholder="Last Name" required>
+            <label for="lName">Last Name</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <label for="email">Email</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <label for="password">Password</label>
+        </div>
+       <input type="submit" class="btn" value="Sign Up" name="signUp">
+      </form>
+      <p class="or">
+        ----------or--------
+      </p>
+      <div class="icons">
+        <i class="fab fa-google"></i>
+        <i class="fab fa-facebook"></i>
+      </div>
+      <div class="links">
+        <p>Already Have Account ?</p>
+        <button id="signInButton">Sign In</button>
+      </div>
+    </div>
+
+    <div class="container" id="signIn">
+        <h1 class="form-title">Sign In</h1>
+        <form method="post" action="register.php">
+          <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" name="email" id="email" placeholder="Email" required>
+              <label for="email">Email</label>
+          </div>
+          <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="password" id="password" placeholder="Password" required>
+              <label for="password">Password</label>
+          </div>
+          <p class="recover">
+            <a href="#">Recover Password</a>
+          </p>
+         <input type="submit" class="btn" value="Sign In" name="signIn">
+        </form>
+        <p class="or">
+          ----------or--------
+        </p>
+        <div class="icons">
+          <i class="fab fa-google"></i>
+          <i class="fab fa-facebook"></i>
+        </div>
+        <div class="links">
+          <p>Don't have account yet?</p>
+          <button id="signUpButton">Sign Up</button>
+        </div>
+      </div>
+      <script src="script.js"></script>
 </body>
-<br>
-<style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-<body>
-
-    <h2>ตารางข้อมูลพัสดุ</h2>
-         <?php
-
-// $db_server = 'localhost';
-// $db_user = "root";
-// $db_pass = "";
-// $db_name = 'test1';
-// $conn = "";
-
-ini_set ('error_reporting', E_ALL);
-ini_set ('display_errors', '1');
-error_reporting (E_ALL|E_STRICT);
-
-$servername='gateway01.ap-southeast-1.prod.aws.tidbcloud.com';
-$username='4Mb27eL6Smm8pmq.root';
-$password='uHwC4nmT0g8Uts0f';
-$dbname='MyDB';
-$port=4000;
-
-$conn=mysqli_init();
-if (!$conn){die("mysqli_init failed");}
-mysqli_ssl_set($conn,NULL,NULL,"isrgrootx1.pem",NULL,NULL); 
-if (!mysqli_real_connect($conn,$servername,$username,$password,$dbname,$port)){die("Connect Error: " . mysqli_connect_error());}
-else {echo "Database connected";}
-
-echo '<br>';   
-
-
-$conn->set_charset("utf8mb4");
-
-$sql = "SELECT NO ,code_id,name FROM object";  // Example query
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Start the table
-    echo "<table border='2'>
-            <tr>
-                <th>NO</th>
-                <th>ID</th>
-                <th>name</th>
-                <th>edit</th>
-
-               
-            </tr>";
-             // Output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>" . $row["NO"]. "</td>   
-                <td>" . $row["code_id"]. "</td>    
-                <td>" . $row["name"]. "</td>
-                <td>" . $row["NO"]. "</td>                 
-              </tr>";
-    }
-    echo "</table>"; // End the table
-} else {
-    echo "0 results";
-}
-$conn->close();
-?>
 </html>
