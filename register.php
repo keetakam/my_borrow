@@ -10,8 +10,8 @@ if(isset($_POST['signUp'])){
     $password=($password);
 
      $checkEmail="SELECT * From users where email='$email'";
-     $result=$conn->query($checkEmail);
-     if($result->num_rows>0){
+     $result2=$conn2->query($checkEmail);
+     if($result2->num_rows>0){
         echo "Email Address Already Exists !";
      }
      else{
@@ -34,7 +34,7 @@ if(isset($_POST['signIn'])){
    $password=($password) ;
    
    $sql="SELECT * FROM users WHERE email='$email' and password='$password'";
-   $result=$conn->query($sql);
+   $result=$conn2->query($sql);
    if($result->num_rows>0){
     session_start();
     $row=$result->fetch_assoc();
