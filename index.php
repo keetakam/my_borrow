@@ -33,9 +33,9 @@
         </div>
        <input type="submit" class="btn" value="Sign Up" name="signUp">
       </form>
-      <p class="or">
+      
+      < class="or">
         ----------or--------
-      </p>
       <div class="icons">
         <i class="fab fa-google"></i>
         <i class="fab fa-facebook"></i>
@@ -45,7 +45,7 @@
         <button id="signInButton">Sign In</button>
       </div>
     </div>
-
+    
     <div class="container" id="signIn">
         <h1 class="form-title">Sign In</h1>
         <form method="post" action="register.php">

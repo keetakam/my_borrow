@@ -25,30 +25,43 @@ include("connect.php");
        }
        ?>
 
-       :)
       </p>
       <a href="logout.php">Logout</a>
 
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, voluptatum.</p> 
+      <p>Connect LocalDB</p> 
 
+      <h1>connect serverless</h1>
+        <?php
+        $conn2=mysqli_init();
+        if (!$conn2){die("mysqli_init failed");}
+        mysqli_ssl_set($conn2,NULL,NULL,"isrgrootx1.pem",NULL,NULL); 
+        if (!mysqli_real_connect($conn2,$servername,$username1,$password1,$dbname1,$port)){die("Connect Error: " . mysqli_connect_error());}
+        else {echo "Database connected serverless";}
+        
+        echo '<br>';   
+         
+        $conn2->set_charset("utf8mb4");
+            $sql2 = "SELECT PersonID,Username,Type FROM Users";  // Example query
+            $result2 = $conn2->query($sql2);
+            while($row2 = $result2->fetch_assoc()) {
+                echo $row2["Username"]. ' Type'.$row2["Type"];
+            }
+
+        ?>
+    
 
     <h2>ตารางข้อมูลพัสดุ</h2>
          <?php
-
 $conn2=mysqli_init();
 if (!$conn2){die("mysqli_init failed");}
 mysqli_ssl_set($conn2,NULL,NULL,"isrgrootx1.pem",NULL,NULL); 
 if (!mysqli_real_connect($conn2,$servername,$username1,$password1,$dbname1,$port)){die("Connect Error: " . mysqli_connect_error());}
-else {echo "Database connected";}
+else {echo "Database connected serverless";}
 
 echo '<br>';   
 
-
-$conn2->set_charset("utf8mb4");
-
-$sql = "SELECT NO ,code_id,name FROM object";  // Example query
+$sql = "SELECT NO ,code_id,name,type FROM object";  // Example query
 $result = $conn2->query($sql);
-
 if ($result->num_rows > 0) {
     // Start the table
     echo "<table border='2'>
@@ -56,9 +69,8 @@ if ($result->num_rows > 0) {
                 <th>NO</th>
                 <th>ID</th>
                 <th>name</th>
-                <th>edit</th>
-
-               
+                <th>type</th>
+                <th>edit</th>  
             </tr>";
              // Output data of each row
     while($row = $result->fetch_assoc()) {
@@ -66,6 +78,7 @@ if ($result->num_rows > 0) {
                 <td>" . $row["NO"]. "</td>   
                 <td>" . $row["code_id"]. "</td>    
                 <td>" . $row["name"]. "</td>
+                <td>" . $row['type']. "</td>
                 <td>" . $row["NO"]. "</td>                 
               </tr>";
     }
