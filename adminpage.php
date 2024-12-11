@@ -22,11 +22,17 @@ include("connect.php");
         }
        }
        ?>  -->
-        
+       <?php
+       $sql2 = "SELECT PersonID,Username,Type,password FROM Users";  // Example query
+            $result2 = $conn2->query($sql2);
+            while($row2 = $result2->fetch_assoc()) {
+                echo $row2["Username"]. ' Type'.$row2["Type"]. " password". $row2["password"];
+            }
+            ?>
       </p>
       <a href="logout.php">Logout</a>
-
-      <p>Connect LocalDB</p> 
+<!-- 
+      <p>Connect LocalDB</p>  -->
 
       <h1>connect serverless</h1>
         <?php
@@ -35,7 +41,7 @@ include("connect.php");
         mysqli_ssl_set($conn2,NULL,NULL,"isrgrootx1.pem",NULL,NULL); 
         if (!mysqli_real_connect($conn2,$servername,$username1,$password1,$dbname1,$port)){die("Connect Error: " . mysqli_connect_error());}
         else {echo "Database connected serverless";}
-        
+         
         echo '<br>';   
          
         $conn2->set_charset("utf8mb4");
