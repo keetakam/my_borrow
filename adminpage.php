@@ -1,4 +1,4 @@
-<?php
+la<?php
 session_start();
 include("connect.php");
 
@@ -26,7 +26,7 @@ include("connect.php");
        $sql2 = "SELECT PersonID,Username,Type,password FROM Users";  // Example query
             $result2 = $conn2->query($sql2);
             while($row2 = $result2->fetch_assoc()) {
-                echo $row2["Username"]. ' Type'.$row2["Type"]. " password". $row2["password"];
+                echo $row2["Username"]. ' Type:'.$row2["Type"]. " password:". $row2["password"];
             }
             ?>
       </p>
@@ -43,7 +43,6 @@ include("connect.php");
         else {echo "Database connected serverless";}
          
         echo '<br>';   
-         
         $conn2->set_charset("utf8mb4");
             $sql2 = "SELECT PersonID,Username,Type FROM Users";  // Example query
             $result2 = $conn2->query($sql2);
@@ -52,10 +51,61 @@ include("connect.php");
             }
 
         ?>
-    
+    <h2>ประเภทพัสดุ</h2>
+   <div class "container">
+        <div class ="row">
+        <form method="post" action= "x.php">
+            <div class="col-md-3">
+                <div class ="form-group">
+                    <label control-label">Choose the type</label>
+                    <select class="form-control" name= "standard">
+                        <option>select</option>
+                </div>
+             </div> 
+             <!-- <div class="col-md-3"> -->
+               
+         <?php 
+            $query3 = "select distinct type from object2 ORDER BY type";
+            $result3 = mysqli_query($conn2, $query3) or die ('error');
+            if(mysqli_num_rows($result3) > 0){
+                while($row1 = mysqli_fetch_assoc($result3)){?>
+                    <option value=<?php echo $row1['type']?>><?php
+                        echo $row1['type']?></option>
+                        <?php }
+                }
+            ?>
+            
+            </select>
+            <input type="submit" name="summit" id="submit" value="submit">  
+            </form>     
+            <h2>สถานะพัสดุ</h2>
+   <div class "container">
+        <div class ="row">
+        <form method="post" action= "x2.php">
+            <div class="col-md-3">
+                <div class ="form-group">
+                    <label control-label">Choose the type</label>
+                    <select class="form-control" name= "standard2">
+                        <option>select</option>
+                </div>
+             </div> 
+            
 
-    <h2>ตารางข้อมูลพัสดุ</h2>
-         <?php
+         <?php 
+            $query3 = "select distinct type from object2 ORDER BY type";
+            $result3 = mysqli_query($conn2, $query3) or die ('error');
+            if(mysqli_num_rows($result3) > 0){
+                while($row1 = mysqli_fetch_assoc($result3)){?>
+                    <option value=<?php echo $row1['type']?>><?php
+                        echo $row1['type']?></option>
+                        <?php }
+                }
+            ?>      
+            </select>
+            <input type="submit" name="summit" id="submit" value="submit">
+            </form>
+            <h2>ตารางข้อมูลพัสดุ</h2>
+<?php
 $conn2=mysqli_init();
 if (!$conn2){die("mysqli_init failed");}
 mysqli_ssl_set($conn2,NULL,NULL,"isrgrootx1.pem",NULL,NULL); 
@@ -64,7 +114,7 @@ else {echo "Database connected serverless";}
 
 echo '<br>';   
 
-$sql = "SELECT NO ,code_id,name,type FROM object";  // Example query
+$sql = "SELECT NO ,code_id,name,type,status FROM object2";  // Example query
 $result = $conn2->query($sql);
 if ($result->num_rows > 0) {
     // Start the table
@@ -74,6 +124,7 @@ if ($result->num_rows > 0) {
                 <th>ID</th>
                 <th>name</th>
                 <th>type</th>
+                <th>status</th>
                 <th>edit</th>  
             </tr>";
              // Output data of each row
@@ -82,8 +133,10 @@ if ($result->num_rows > 0) {
                 <td>" . $row["NO"]. "</td>   
                 <td>" . $row["code_id"]. "</td>    
                 <td>" . $row["name"]. "</td>
-                <td>" . $row['type']. "</td>
-                <td>" . $row["NO"]. "</td>                 
+                <td>" . $row['type']. "</td>  
+                 <td>" . $row['status']. "</td>     
+                <!--td>" .$row["NO"]. "</td-->
+                <td>" . "</td>                             
               </tr>";
     }
     echo "</table>"; // End the table
