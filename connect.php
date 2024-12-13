@@ -25,7 +25,7 @@ $conn2=mysqli_init();
 if (!$conn2){die("mysqli_init failed");}
 mysqli_ssl_set($conn2,NULL,NULL,"isrgrootx1.pem",NULL,NULL); 
 if (!mysqli_real_connect($conn2,$servername,$username1,$password1,$dbname1,$port)){die("Connect Error: " . mysqli_connect_error());}
-else {echo "Database connected serverless";}
+else {echo "Database connected serverlessaa";}
 
 ?>
 
