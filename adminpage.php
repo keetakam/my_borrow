@@ -10,7 +10,7 @@ include("connect.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <title>Adminpage1</title>
+    <title>Adminpage</title>
 </head>
 
 
@@ -28,10 +28,10 @@ include("connect.php");
        ?>  -->
        <p>
        <?php
-       $sql2 = "SELECT PersonID,Username,Type,password FROM Users";  // Example query
+       $sql2 = "SELECT ID,Username,Type,Password FROM Users";  // Example query
             $result2 = $conn2->query($sql2);
             while($row2 = $result2->fetch_assoc()) {
-                echo $row2["Username"]. ' Type:'.$row2["Type"]. " password:". $row2["password"];
+                echo $row2["Username"]. ' Type:'.$row2["Type"]. " password:". $row2["Password"]. "iD". $row2["ID"];
             }
             ?>
       </p>
@@ -49,7 +49,7 @@ include("connect.php");
          
         echo '<br>';   
         $conn2->set_charset("utf8mb4");
-            $sql2 = "SELECT PersonID,Username,Type FROM Users";  // Example query
+            $sql2 = "SELECT ID,Username,Type FROM Users";  // Example query
             $result2 = $conn2->query($sql2);
             while($row2 = $result2->fetch_assoc()) {
                 echo $row2["Username"]. ' Type'.$row2["Type"];
@@ -58,6 +58,10 @@ include("connect.php");
             <div class="box1">
             <h2>ตารางข้อมูลพัสดุ</h2>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD OBJECT</button>
+            <button type="button" class="btn btn-primary"<href>ยืมพัสดุ</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">รายการยืม</button>
+            <a href="borrow.php"><input type="button" value="ยืมพัสดู"></a>
+
             <!-- Button trigger modal -->
           </div>
           
